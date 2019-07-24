@@ -11,7 +11,8 @@ public class Turret : MonoBehaviour {
     public float range = 15f;
 
     public float fireRate = 1f;
-    private float fireCountdown = 0f;
+    public float initialTimeUntilFire = 1f;
+    private float fireCountdown;
 
     [Header("Unity Setup Fields")]
 
@@ -26,6 +27,8 @@ public class Turret : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
+        fireCountdown = initialTimeUntilFire;
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 
@@ -60,6 +63,8 @@ public class Turret : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        fireCountdown -= Time.deltaTime;
+
         if (target == null) {
             return;
         }
@@ -74,8 +79,6 @@ public class Turret : MonoBehaviour {
             Shoot();
             fireCountdown = 1f / fireRate;
         }
-
-        fireCountdown -= Time.deltaTime;
 
     }
 
