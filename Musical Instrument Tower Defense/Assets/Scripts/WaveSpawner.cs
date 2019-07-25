@@ -18,15 +18,15 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+        countdown -= Time.deltaTime;
+
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
         }
 
-        waveCountdownText.text = Mathf.Ceil(countdown).ToString();
-
-        countdown -= Time.deltaTime;
+        waveCountdownText.text = string.Format("{0:00.00}", countdown);
     }
 
     IEnumerator SpawnWave()
