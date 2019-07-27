@@ -6,13 +6,20 @@ public class Turret : MonoBehaviour {
 
     private Transform target;
 
-    [Header("Attributes")]
+    [Header("General")]
 
     public float range = 15f;
 
+
+    [Header("Use Bullets (default)")]
+    public GameObject bulletPrefab;
     public float fireRate = 1f;
     public float initialTimeUntilFire = 1f;
     private float fireCountdown;
+
+    [Header("Use Laser")]
+    public bool useLaser = false;
+    public LineRenderer lineRenderer;
 
     [Header("Unity Setup Fields")]
 
@@ -21,7 +28,6 @@ public class Turret : MonoBehaviour {
     public Transform partToRotate;
     public float turnSpeed = 10f;
 
-    public GameObject bulletPrefab;
     public Transform firePoint;
 
     // Start is called before the first frame update
@@ -63,23 +69,58 @@ public class Turret : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        fireCountdown -= Time.deltaTime;
+        if (!useLaser)
+        {
+            fireCountdown -= Time.deltaTime;
+        }
 
         if (target == null) {
+            // if turret is a laser, then when the target disappears the laser disappears
+            if (useLaser)
+            {
+                if (lineRenderer.enabled)
+                {
+                    lineRenderer.enabled = false;
+                }
+            }
+
+            // if no target, then don't do anything
             return;
         }
 
-        //target lock on
+        LockOnTarget();
+
+        if (useLaser)
+        {
+            Laser();
+        } else
+        {
+            if (fireCountdown <= 0f)
+            {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
+        }
+
+    }
+
+    void LockOnTarget()
+    {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
 
-        if (fireCountdown <= 0f) {
-            Shoot();
-            fireCountdown = 1f / fireRate;
+    void Laser()
+    {
+        if (!lineRenderer.enabled)
+        {
+            lineRenderer.enabled = true;
         }
 
+        lineRenderer.SetPosition(0, firePoint.position);
+        lineRenderer.SetPosition(1, target.position);
     }
 
     void Shoot() {
