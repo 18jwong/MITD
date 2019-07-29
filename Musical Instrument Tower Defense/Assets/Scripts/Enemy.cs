@@ -2,9 +2,12 @@
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 10f;
+    public float startSpeed = 10f;
 
-    public int health = 100;
+    [HideInInspector]
+    public float speed;
+
+    public float health = 100;
 
     public int moneyValue = 50;
 
@@ -12,23 +15,24 @@ public class Enemy : MonoBehaviour
 
     public GameObject deathEffect;
 
-    private Transform target;
-    private int waypointIndex = 0;
-
-    void Start() {
-
-        // initialize target
-        target = Waypoints.points[0];
-
+    private void Start()
+    {
+        speed = startSpeed;
     }
 
-    public void DecreaseHealth(int amount)
+    public void DecreaseHealth(float amount)
     {
         health -= amount;
 
         if (health <= 0) {
             Die();
         }
+    }
+
+    public void Slow(float pct)
+    {
+        speed = startSpeed * (1f - pct);
+
     }
 
     void Die()
@@ -39,39 +43,6 @@ public class Enemy : MonoBehaviour
         Destroy(effect, 5f);
 
         Destroy(gameObject);
-    }
-
-    void Update() {
-
-        // find direction the enemy should travel in
-        Vector3 dir = target.position - transform.position;
-        // move enemy w/ speed * Time
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-
-        // if close enough to waypoint
-        if (Vector3.Distance(transform.position, target.position) <= 0.5f) {
-
-            // if enemy gets to last waypoint
-            if (waypointIndex >= Waypoints.points.Length - 1)
-            {
-                EndReached();
-                return;
-            }
-
-            GetNextWaypoint();
-        }
-
-    }
-
-    void EndReached()
-    {
-        PlayerStats.SubtractLives(livesValue);
-        Destroy(gameObject);
-    }
-
-    void GetNextWaypoint() {
-        waypointIndex++;
-        target = Waypoints.points[waypointIndex];
     }
 
 }
