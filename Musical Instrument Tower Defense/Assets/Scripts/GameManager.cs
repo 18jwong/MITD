@@ -4,19 +4,31 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public float timeBtwnCheckGameEnds = 0.5f;
+    public static bool GameIsOver;
 
-    private bool gameEnded = false;
+    public GameObject gameOverUI;
 
     private void Start()
     {
+        // When reloading the level, UI stays active so it must be disabled
+        gameOverUI.SetActive(false);
+
+        GameIsOver = false;
+
         StartCoroutine(CheckForGameEnd());
     }
 
     // CheckForGameEnd is called once every timeBtwnCheckGameEnds seconds
     IEnumerator CheckForGameEnd()
     {
-        while (!gameEnded)
+        while (!GameIsOver)
         {
+            // Temporary testing end of game
+            if (Input.GetKeyDown("e"))
+            {
+                EndGame();
+            }
+
             if (PlayerStats.Lives <= 0)
             {
                 EndGame();
@@ -28,7 +40,8 @@ public class GameManager : MonoBehaviour
 
     void EndGame()
     {
-        gameEnded = true;
-        Debug.Log("Game Over!");
+        GameIsOver = true;
+
+        gameOverUI.SetActive(true);
     }
 }
