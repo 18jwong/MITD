@@ -33,16 +33,16 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
+        // If turret already exists on the node, set current selection to node
+        if (turret != null)
+        {
+            buildManager.SelectNode(this);
+            return;
+        }
+
         // If there's no selected turret in shop, return
         if (!buildManager.CanBuild)
             return;
-
-        // If turret already exists on the node, return
-        if (turret != null)
-        {
-            Debug.Log("Can't Build There! - TODO: Display on screen.");
-            return;
-        }
 
         buildManager.BuildTurretOn(this);
     }

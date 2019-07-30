@@ -10,9 +10,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // When reloading the level, UI stays active so it must be disabled
-        gameOverUI.SetActive(false);
-
         GameIsOver = false;
 
         StartCoroutine(CheckForGameEnd());
