@@ -14,7 +14,7 @@ public class Turret : MonoBehaviour {
 
     [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
-    public float fireRate = 1f;
+    public float fireRateShotsPerSecond = 1f;
     public float initialTimeUntilFire = 1f;
     private float fireCountdown;
 
@@ -103,12 +103,13 @@ public class Turret : MonoBehaviour {
         if (useLaser)
         {
             Laser();
-        } else
+        }
+        else
         {
             if (fireCountdown <= 0f)
             {
                 Shoot();
-                fireCountdown = 1f / fireRate;
+                fireCountdown = 1f / fireRateShotsPerSecond;
             }
         }
 
