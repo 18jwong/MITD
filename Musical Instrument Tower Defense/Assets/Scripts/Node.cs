@@ -96,6 +96,20 @@ public class Node : MonoBehaviour
         Debug.Log("Turret upgraded!");
     }
 
+    public void SellTurret()
+    {
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+
+        // Spawn a cool effect
+        GameObject effect = (GameObject)Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
+        Destroy(effect, 5f);
+
+        isUpgraded = false;
+
+        Destroy(turret);
+        turretBlueprint = null;
+    }
+
     // Called first time, every time mouse enters the collider of object
     void OnMouseEnter()
     {

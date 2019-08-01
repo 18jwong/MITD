@@ -49,6 +49,7 @@ public class EnemyMovement : MonoBehaviour
     void EndReached()
     {
         PlayerStats.SubtractLives(enemy.livesValue);
+        WaveSpawner.decrementEnemiesAlive();
         Destroy(gameObject);
     }
 }
