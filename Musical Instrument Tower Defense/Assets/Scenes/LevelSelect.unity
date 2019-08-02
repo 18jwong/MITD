@@ -657,7 +657,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -66.4}
+  m_AnchoredPosition: {x: 0, y: -66.36999}
   m_SizeDelta: {x: 568.5, y: 262.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1238745376
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1173,6 +1173,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6ce46cbfcc3a9f459fa5c6f7e63ca75, type: 3}
+--- !u!114 &1556542281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6330942202319484809, guid: e6ce46cbfcc3a9f459fa5c6f7e63ca75,
+    type: 3}
+  m_PrefabInstance: {fileID: 1556542280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1562256708 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3369051532106566199, guid: f42cc36c314a73e4c992a27b4e8c7331,
@@ -1215,6 +1227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 1562256708}
+  levelButtons:
+  - {fileID: 2290136302159352176}
+  - {fileID: 1556542281}
 --- !u!4 &1628877785
 Transform:
   m_ObjectHideFlags: 0
@@ -1549,5 +1564,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level01
       objectReference: {fileID: 0}
+    - target: {fileID: 7088749546409535569, guid: e6ce46cbfcc3a9f459fa5c6f7e63ca75,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6ce46cbfcc3a9f459fa5c6f7e63ca75, type: 3}
+--- !u!114 &2290136302159352176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6330942202319484809, guid: e6ce46cbfcc3a9f459fa5c6f7e63ca75,
+    type: 3}
+  m_PrefabInstance: {fileID: 2290136302159352175}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
