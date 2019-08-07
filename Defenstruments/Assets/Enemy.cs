@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     private float health;
 
     private bool isDead = false;
+
+    private TowerManager towerManager;
     
     // Start is called before the first frame update
     void Start()
@@ -41,10 +43,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // Helper function for DecreaseHealth()
     private void Die()
     {
         isDead = true;
+        towerManager.RemoveEnemyFromTowers(gameObject);
+        WaveSpawner.decrementEnemiesAlive();
 
         Destroy(gameObject);
+    }
+
+    public void SetTMReference(TowerManager tm)
+    {
+        towerManager = tm;
     }
 }

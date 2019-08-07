@@ -63,10 +63,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\Projectile.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\Tower.cs" />
     <Compile Include="Assets\Scripts\TowerBlueprint.cs" />
     <Compile Include="Assets\Scripts\TowerBuilder.cs" />
+    <Compile Include="Assets\Scripts\Wave.cs" />
+    <Compile Include="Assets\TowerManager.cs" />
+    <Compile Include="Assets\WaveSpawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Unity Projects/MITD/Defenstruments/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
