@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
 
     private TowerManager towerManager;
+    private WaveSpawner waveSpawner;
     
     // Start is called before the first frame update
     void Start()
@@ -48,13 +49,14 @@ public class Enemy : MonoBehaviour
     {
         isDead = true;
         towerManager.RemoveEnemyFromTowers(gameObject);
-        WaveSpawner.decrementEnemiesAlive();
+        waveSpawner.DecrementEnemiesAlive();
 
         Destroy(gameObject);
     }
 
-    public void SetTMReference(TowerManager tm)
+    public void SetManagerReferences(TowerManager tm, WaveSpawner ws)
     {
         towerManager = tm;
+        waveSpawner = ws;
     }
 }

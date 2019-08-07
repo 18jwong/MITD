@@ -13,7 +13,7 @@ public class WaveSpawner : MonoBehaviour
     private float countdown = 2f;
 
     private int waveIndex = 0;
-    private static int enemiesAlive = 0;
+    private int enemiesAlive = 0;
 
     private void Start()
     {
@@ -23,16 +23,19 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If enemies are still on screen, do nothing.
         if (enemiesAlive > 0)
             return;
 
+        // If the last wave has been reached, end game.
         if (waveIndex >= waves.Length)
         {
-            //gameManager.WinLevel();
+            //gameManager.WinLevel(); // TODO: when all enemies die, end level
             this.enabled = false;
             return;
         }
 
+        // If the given amount of time has reached zero, start the next wave and reset timer.
         if (countdown <= 0f)
         {
             StartCoroutine(SpawnWave());
@@ -41,8 +44,6 @@ public class WaveSpawner : MonoBehaviour
         }
 
         countdown -= Time.deltaTime;
-
-        countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
     }
 
     IEnumerator SpawnWave()
@@ -65,14 +66,14 @@ public class WaveSpawner : MonoBehaviour
         // Spawn enemy
         GameObject newEnemy = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
 
-        // Set towerManager reference for the enemy
-        newEnemy.GetComponent<Enemy>().SetTMReference(towerManager);
+        // Set towerManager and waveSpawner reference for the enemy
+        newEnemy.GetComponent<Enemy>().SetManagerReferences(towerManager, this);
 
         // Add the enemy to list of enemies towers should shoot at
         towerManager.AddEnemyToTowers(newEnemy);
     }
 
-    public static void decrementEnemiesAlive()
+    public void DecrementEnemiesAlive()
     {
         enemiesAlive--;
     }

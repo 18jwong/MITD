@@ -15,7 +15,7 @@ public class TowerBuilder : MonoBehaviour
         Vector3 targetCell = grid.WorldToCell(node.transform.position);
         int cellX = (int)targetCell.x;
         int cellY = (int)targetCell.y;
-        GameObject column = cols[cellX];
+        Transform column = cols[cellX].transform;
 
         // Save the nodes into array to unlight them
         litNodes = new Node[cols.Length + cols[0].transform.childCount - 1];
@@ -24,7 +24,7 @@ public class TowerBuilder : MonoBehaviour
         // Light up nodes vertically
         for (int i = 0; i < cols[0].transform.childCount; i++)
         {
-            Transform t = column.transform.GetChild(i);
+            Transform t = column.GetChild(i);
             StoreNode(t);
         }
 

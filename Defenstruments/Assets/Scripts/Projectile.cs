@@ -2,11 +2,13 @@
 
 public class Projectile : MonoBehaviour
 {
+    // These are controlled in the Tower script
     private float speed = 30f;
     private float damage = 10f;
 
     private Transform target;
 
+    // Tower script should be calling this to set the values
     public void Seek(Transform t, float s, float d)
     {
         target = t;
@@ -14,17 +16,16 @@ public class Projectile : MonoBehaviour
         damage = d;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(target == null)
         {
-            Destroy(gameObject);
             Debug.Log("Projectile.cs: Enemy is null");
+            Destroy(gameObject);
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector2 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
 
         // DistanceThisFrame exceeds where target is, then HitTarget()

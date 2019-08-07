@@ -7,6 +7,7 @@ public class Tower : MonoBehaviour
     [Header("Tower Properties")]
     public float range = 99f;
 
+    // These are passed into the projectile
     [Header("Projectile Properties")]
     public float speed = 30f;
     public float damage = 10f;
@@ -34,6 +35,7 @@ public class Tower : MonoBehaviour
     {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
+
         LinkedListNode<GameObject> cursor = enemiesToHit.First;
 
         for(int i = 0; i < enemiesToHit.Count; i++)

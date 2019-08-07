@@ -3,15 +3,15 @@
 public class Node : MonoBehaviour
 {
     public SpriteRenderer rend;
-    public Color secondColor;
+
     private Color originalColor;
+    public Color secondColor;
 
     public Grid grid;
     private TowerBuilder towerBuilder;
 
+    // Unity Functions ------------------------------
 
-    // Unity Functions
-    
     private void Start()
     {
         originalColor = rend.color;
@@ -21,17 +21,15 @@ public class Node : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        LightUp();
         towerBuilder.LightUpNodes(this);
     }
 
     private void OnMouseExit()
     {
-        UnlightUp();
         towerBuilder.UnlightUpNodes();
     }
 
-    // Manipulation Procedures
+    // Manipulation Functions ------------------------------
 
     public void LightUp()
     {

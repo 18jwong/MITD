@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
-    public GameObject[] towers;
+    public GameObject[] towers; // TODO: make this private
+
+    // TODO: so we can add enemies to towers that are built
+    //private GameObject[] enemiesInRow;
 
     public void AddEnemyToTowers(GameObject e)
     {
