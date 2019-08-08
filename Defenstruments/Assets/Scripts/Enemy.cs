@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private float speed;
     private float health;
 
+    private int rowNum;
     private bool isDead = false;
 
     private TowerManager towerManager;
@@ -48,7 +49,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        towerManager.RemoveEnemyFromTowers(gameObject);
+        towerManager.RemoveEnemyFromTowers(gameObject, rowNum);
         waveSpawner.DecrementEnemiesAlive();
 
         Destroy(gameObject);
@@ -58,5 +59,15 @@ public class Enemy : MonoBehaviour
     {
         towerManager = tm;
         waveSpawner = ws;
+    }
+
+    public void SetRowNum(int rN)
+    {
+        rowNum = rN;
+    }
+
+    public int GetRowNum()
+    {
+        return rowNum;
     }
 }

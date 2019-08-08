@@ -52,8 +52,7 @@ MonoBehaviour:
     count: 2
     rate: 1
   towerManager: {fileID: 3206045558132944028}
-  spawnPoint: {fileID: 8477463514798894510, guid: b015eb75dfd3a6240a36e00e152166c0,
-    type: 3}
+  grid: {fileID: 4403130343471280099, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}
   timeBetweenWaves: 5
   initialTimeBeforeStart: 2
 --- !u!114 &3206045558132944028
@@ -68,5 +67,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c562a4ed93010946b25de226a2e091e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towers:
-  - {fileID: 0}
+  grid: {fileID: 4403130343471280099, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}

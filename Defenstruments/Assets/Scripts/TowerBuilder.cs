@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/* Notes: -need to set tower's rowNum after building for targetting to work
+ * 
+ */
+
 public class TowerBuilder : MonoBehaviour
 {
     public Grid grid;
@@ -7,6 +11,12 @@ public class TowerBuilder : MonoBehaviour
 
     private Node[] litNodes;
     private int nodeCount;
+
+    // For TowerManager to create the correct number of rows
+    public int GetRowCount()
+    {
+        return cols[0].transform.childCount;
+    }
 
     // Lights up nodes vertically and horizontally from the node hovered over
     public void LightUpNodes(Node node)

@@ -6,6 +6,7 @@ public class Tower : MonoBehaviour
 {
     [Header("Tower Properties")]
     public float range = 99f;
+    public bool singleLaneTargetting = true;
 
     // These are passed into the projectile
     [Header("Projectile Properties")]
@@ -23,6 +24,7 @@ public class Tower : MonoBehaviour
     // Private variables
     private Transform target;
     private LinkedList<GameObject> enemiesToHit = new LinkedList<GameObject>();
+    private int rowNum;
 
     void Start()
     {
@@ -101,5 +103,15 @@ public class Tower : MonoBehaviour
         {
             projectile.Seek(target, speed, damage);
         }
+    }
+
+    public void SetRowNum(int rN)
+    {
+        rowNum = rN;
+    }
+
+    public int GetRowNum()
+    {
+        return rowNum;
     }
 }

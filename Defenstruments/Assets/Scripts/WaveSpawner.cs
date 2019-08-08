@@ -6,7 +6,10 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
 
     public TowerManager towerManager;
-    public Transform spawnPoint;
+
+    public Grid grid;
+    private SpawnPointHolder spawnPointHolder;
+    private GameObject[] spawnPoints;
 
     public float timeBetweenWaves = 5f;
     public float initialTimeBeforeStart = 2f;
@@ -18,6 +21,9 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         countdown = initialTimeBeforeStart;
+
+        spawnPointHolder = grid.GetComponent<SpawnPointHolder>();
+        spawnPoints = spawnPointHolder.spawnPoints;
     }
 
     // Update is called once per frame
@@ -64,13 +70,14 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy(GameObject enemy)
     {
         // Spawn enemy
-        GameObject newEnemy = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
+        int randomPoint = (int)Mathf.Round(Random.Range(0, spawnPoints.Length));
+        GameObject newEnemy = Instantiate(enemy, spawnPoints[randomPoint].transform.position, Quaternion.identity);
 
         // Set towerManager and waveSpawner reference for the enemy
         newEnemy.GetComponent<Enemy>().SetManagerReferences(towerManager, this);
 
         // Add the enemy to list of enemies towers should shoot at
-        towerManager.AddEnemyToTowers(newEnemy);
+        towerManager.AddEnemyToTowers(newEnemy, randomPoint);
     }
 
     public void DecrementEnemiesAlive()
