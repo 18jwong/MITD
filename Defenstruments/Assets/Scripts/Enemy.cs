@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        towerManager.RemoveEnemyFromTowers(gameObject, rowNum);
+        towerManager.RemoveEnemy(gameObject, rowNum);
         waveSpawner.DecrementEnemiesAlive();
 
         Destroy(gameObject);

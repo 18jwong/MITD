@@ -77,7 +77,7 @@ public class WaveSpawner : MonoBehaviour
         newEnemy.GetComponent<Enemy>().SetManagerReferences(towerManager, this);
 
         // Add the enemy to list of enemies towers should shoot at
-        towerManager.AddEnemyToTowers(newEnemy, randomPoint);
+        towerManager.AddEnemy(newEnemy, randomPoint);
     }
 
     public void DecrementEnemiesAlive()

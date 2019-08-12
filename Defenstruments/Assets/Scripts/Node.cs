@@ -7,8 +7,10 @@ public class Node : MonoBehaviour
     private Color originalColor;
     public Color secondColor;
 
-    public Grid grid;
-    private TowerBuilder towerBuilder;
+    TowerBuilder towerBuilder;
+    TowerManager towerManager;
+
+    private GameObject tower;
 
     // Unity Functions ------------------------------
 
@@ -16,7 +18,17 @@ public class Node : MonoBehaviour
     {
         originalColor = rend.color;
 
-        towerBuilder = grid.GetComponent<TowerBuilder>();
+        towerBuilder = TowerBuilder.instance;
+        towerManager = TowerManager.instance;
+    }
+
+    private void OnMouseDown()
+    {
+        // Build tower
+        Debug.Log("Tower Building");
+        GameObject t = (GameObject)Instantiate(towerBuilder.GetTowerToBuild(), transform.position, Quaternion.identity);
+        towerManager.AddTowerToTowers(t);
+        tower = t;
     }
 
     private void OnMouseEnter()

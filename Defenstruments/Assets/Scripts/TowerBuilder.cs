@@ -6,11 +6,25 @@
 
 public class TowerBuilder : MonoBehaviour
 {
+    public static TowerBuilder instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one TowerBuilder in scene!");
+            return;
+        }
+        instance = this;
+    }
+
     public Grid grid;
     public GameObject[] cols;
 
     private Node[] litNodes;
     private int nodeCount;
+
+    private GameObject towerToBuild;
 
     // For TowerManager to create the correct number of rows
     public int GetRowCount()
@@ -65,5 +79,15 @@ public class TowerBuilder : MonoBehaviour
         {
             litNodes[i].UnlightUp();
         }
+    }
+
+    public void SetTowerToBuild(GameObject t)
+    {
+        towerToBuild = t;
+    }
+
+    public GameObject GetTowerToBuild()
+    {
+        return towerToBuild;
     }
 }

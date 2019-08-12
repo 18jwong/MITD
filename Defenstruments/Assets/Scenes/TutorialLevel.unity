@@ -199,33 +199,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &364143210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3206045558132944019, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
+--- !u!114 &364143211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 364143211, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
     type: 3}
   m_PrefabInstance: {fileID: 3206045556825008788}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &364143211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364143210}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcce4fe640e1b0f48b46739d82c6d3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerBlueprints:
-  - prefab: {fileID: 0}
-    cost: 0
-  - prefab: {fileID: 0}
-    cost: 0
-  - prefab: {fileID: 0}
-    cost: 0
-  - prefab: {fileID: 0}
-    cost: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +474,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 918544400}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 364143211}
+        m_MethodName: SelectTower
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &918544400
@@ -842,26 +838,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3206045558132944029, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 4403130341748476909}
-    - target: {fileID: 3206045558132944029, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 4403130341748476908}
-    - target: {fileID: 3206045558132944029, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 4403130341748476907}
-    - target: {fileID: 3206045558132944029, guid: 4deb6f9ab2b96064fa6e2e3290dac74f,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 4403130341748476906}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4deb6f9ab2b96064fa6e2e3290dac74f, type: 3}
 --- !u!1001 &4403130341748476905
@@ -933,27 +909,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}
---- !u!1 &4403130341748476906 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7024998431168485341, guid: 8edf1e2378685e444be65bb50b984d07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4403130341748476905}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4403130341748476907 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5349170385781560687, guid: 8edf1e2378685e444be65bb50b984d07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4403130341748476905}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4403130341748476908 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4486957191625270927, guid: 8edf1e2378685e444be65bb50b984d07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4403130341748476905}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4403130341748476909 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3044969705565642910, guid: 8edf1e2378685e444be65bb50b984d07,
-    type: 3}
-  m_PrefabInstance: {fileID: 4403130341748476905}
-  m_PrefabAsset: {fileID: 0}

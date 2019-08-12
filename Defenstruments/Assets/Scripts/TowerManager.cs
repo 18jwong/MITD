@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
-    public Grid grid;
-    private TowerBuilder towerBuilder;
+    public static TowerManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one TowerManager in scene!");
+            return;
+        }
+        instance = this;
+    }
+
+    TowerBuilder towerBuilder;
 
     private LinkedList<GameObject> towers = new LinkedList<GameObject>();
     private LinkedList<LinkedList<GameObject>> enemiesInRow = new LinkedList<LinkedList<GameObject>>();
 
-    public void Start()
+    private void Start()
     {
-        towerBuilder = grid.GetComponent<TowerBuilder>();
+        towerBuilder = TowerBuilder.instance;
 
         // Creates a LinkedList row for each row on screen
         // corresponding with y coord, bottom to top
@@ -54,7 +65,7 @@ public class TowerManager : MonoBehaviour
     }
 
 
-    public void AddEnemyToTowers(GameObject e, int rowNum)
+    private void AddEnemyToTowers(GameObject e, int rowNum)
     {
         LinkedListNode<GameObject> cursor = towers.First;
         for (int i = 0; i < towers.Count; i++)
@@ -69,7 +80,7 @@ public class TowerManager : MonoBehaviour
             cursor = cursor.Next;
         }
     }
-    public void RemoveEnemyFromTowers(GameObject e, int rowNum)
+    private void RemoveEnemyFromTowers(GameObject e, int rowNum)
     {
         LinkedListNode<GameObject> cursor = towers.First;
         for (int i = 0; i < towers.Count; i++)

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3206045558132944030}
   - component: {fileID: 3206045558132944029}
   - component: {fileID: 3206045558132944028}
+  - component: {fileID: 364143211}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -67,4 +68,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c562a4ed93010946b25de226a2e091e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 4403130343471280099, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}
+--- !u!114 &364143211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206045558132944019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcce4fe640e1b0f48b46739d82c6d3e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerBlueprints:
+  - prefab: {fileID: 3032664706651625655, guid: e7341c3834e8fcd42b240a75425b9797,
+      type: 3}
+    cost: 100
   grid: {fileID: 4403130343471280099, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}
