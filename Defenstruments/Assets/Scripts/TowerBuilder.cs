@@ -18,19 +18,22 @@ public class TowerBuilder : MonoBehaviour
         instance = this;
     }
 
+    TowerManager towerManager;
+
     public Grid grid;
     public GameObject[] cols;
 
     private Node[] litNodes;
     private int nodeCount;
 
-    private GameObject towerToBuild;
+    private TowerBlueprint towerToBuild;
 
-    // For TowerManager to create the correct number of rows
-    public int GetRowCount()
+    private void Start()
     {
-        return cols[0].transform.childCount;
+        towerManager = TowerManager.instance;
     }
+
+    // Node Lightup functions ------------------------------------------------
 
     // Lights up nodes vertically and horizontally from the node hovered over
     public void LightUpNodes(Node node)
@@ -81,13 +84,64 @@ public class TowerBuilder : MonoBehaviour
         }
     }
 
-    public void SetTowerToBuild(GameObject t)
+    // Build Tower functions ------------------------------------------------
+
+    // Builds a tower on the given node and returns a reference to it
+    public GameObject BuildTowerOnNode(Node node)
+    {
+        // If no tower is selected, return null
+        if (towerToBuild == null)
+        {
+            Debug.Log("TowerBuilder: No tower selected");
+            return null;
+        }
+
+        // If not enough money, return null
+        if(PlayerStats.GetMoney() - towerToBuild.cost < 0)
+        {
+            Debug.Log("TowerBuilder: Not enough money");
+            return null;
+        }
+
+        // Subtract money
+        PlayerStats.AddMoney(-towerToBuild.cost);
+
+        // Create tower
+        GameObject t = (GameObject)Instantiate(towerToBuild.prefab, node.transform.position, Quaternion.identity);
+
+        // Set row number
+        int rowNum = GetNodeRowNumber(node);
+        t.GetComponent<Tower>().SetRowNum(rowNum);
+
+        // Set up targetting
+        towerManager.AddTowerToTowers(t);
+        return t;
+    }
+
+    // Store the selected tower in shop
+    public void SetTowerToBuild(TowerBlueprint t)
     {
         towerToBuild = t;
     }
 
+    // Returns the selected tower in shop
+    /*
     public GameObject GetTowerToBuild()
     {
         return towerToBuild;
+    }
+    */
+
+    // For TowerManager to create the correct number of rows
+    public int GetRowCount()
+    {
+        return cols[0].transform.childCount;
+    }
+
+    // Returns the row number of the node passed in
+    public int GetNodeRowNumber(Node node)
+    {
+        Vector3 targetCell = grid.WorldToCell(node.transform.position);
+        return (int)targetCell.y;
     }
 }

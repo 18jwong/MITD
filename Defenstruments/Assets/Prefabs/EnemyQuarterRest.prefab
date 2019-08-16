@@ -93,6 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSpeed: 1
-  startHealth: 100
-  moneyValue: 50
+  startHealth: 30
+  moneyValue: 250
   livesValue: 1

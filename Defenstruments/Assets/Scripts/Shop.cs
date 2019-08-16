@@ -2,7 +2,7 @@
 
 public class Shop : MonoBehaviour
 {
-    public TowerBlueprint[] towerBlueprints;
+    public GameObject[] towerBlueprints;
 
     TowerBuilder towerBuilder;
 
@@ -14,6 +14,6 @@ public class Shop : MonoBehaviour
     // Select towers
     public void SelectTower(int i)
     {
-        towerBuilder.SetTowerToBuild(towerBlueprints[i].prefab);
+        towerBuilder.SetTowerToBuild(towerBlueprints[i].GetComponent<TowerBlueprintHolder>().towerBlueprint);
     }
 }

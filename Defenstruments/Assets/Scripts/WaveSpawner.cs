@@ -67,17 +67,19 @@ public class WaveSpawner : MonoBehaviour
         waveIndex++;
     }
 
-    void SpawnEnemy(GameObject enemy)
+    void SpawnEnemy(GameObject eGO)
     {
         // Spawn enemy
         int randomPoint = (int)Mathf.Round(Random.Range(0, spawnPoints.Length));
-        GameObject newEnemy = Instantiate(enemy, spawnPoints[randomPoint].transform.position, Quaternion.identity);
+        GameObject newEnemyGO = Instantiate(eGO, spawnPoints[randomPoint].transform.position, Quaternion.identity);
 
-        // Set towerManager and waveSpawner reference for the enemy
-        newEnemy.GetComponent<Enemy>().SetManagerReferences(towerManager, this);
+        // Set waveSpawner reference and rowNum for the enemy
+        Enemy enemy = newEnemyGO.GetComponent<Enemy>();
+        enemy.SetManagerReferences(this);
+        enemy.SetRowNum(randomPoint);
 
         // Add the enemy to list of enemies towers should shoot at
-        towerManager.AddEnemy(newEnemy, randomPoint);
+        towerManager.AddEnemy(newEnemyGO, randomPoint);
     }
 
     public void DecrementEnemiesAlive()

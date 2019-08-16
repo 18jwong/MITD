@@ -8,28 +8,29 @@ public class Node : MonoBehaviour
     public Color secondColor;
 
     TowerBuilder towerBuilder;
-    TowerManager towerManager;
 
-    private GameObject tower;
-
-    // Unity Functions ------------------------------
+    private GameObject tower = null;
 
     private void Start()
     {
         originalColor = rend.color;
 
         towerBuilder = TowerBuilder.instance;
-        towerManager = TowerManager.instance;
     }
 
     private void OnMouseDown()
     {
+        if(tower != null)
+        {
+            Debug.Log("Node: Tower exists here already");
+            return;
+        }
+
         // Build tower
-        Debug.Log("Tower Building");
-        GameObject t = (GameObject)Instantiate(towerBuilder.GetTowerToBuild(), transform.position, Quaternion.identity);
-        towerManager.AddTowerToTowers(t);
-        tower = t;
+        tower = towerBuilder.BuildTowerOnNode(this);
     }
+
+    // Node Lightup functions -------------------------------
 
     private void OnMouseEnter()
     {

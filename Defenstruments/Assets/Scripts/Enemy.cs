@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        towerManager = TowerManager.instance;
+
         speed = startSpeed;
         health = startHealth;
     }
@@ -49,15 +51,19 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
+
+        // Remove the enemy from targetting and wave spawner
         towerManager.RemoveEnemy(gameObject, rowNum);
         waveSpawner.DecrementEnemiesAlive();
+
+        // Add money
+        PlayerStats.AddMoney(moneyValue);
 
         Destroy(gameObject);
     }
 
-    public void SetManagerReferences(TowerManager tm, WaveSpawner ws)
+    public void SetManagerReferences(WaveSpawner ws)
     {
-        towerManager = tm;
         waveSpawner = ws;
     }
 

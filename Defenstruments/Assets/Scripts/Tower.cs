@@ -38,7 +38,9 @@ public class Tower : MonoBehaviour
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
-        LinkedListNode<GameObject> cursor = enemiesToHit.First;
+        // Checking in reverse order so when an enemy dies, the actual
+        // first enemy will be removed.
+        LinkedListNode<GameObject> cursor = enemiesToHit.Last;
 
         for(int i = 0; i < enemiesToHit.Count; i++)
         {
@@ -51,7 +53,7 @@ public class Tower : MonoBehaviour
                 nearestEnemy = e;
             }
 
-            cursor = cursor.Next;
+            cursor = cursor.Previous;
         }
 
         if (nearestEnemy != null && shortestDistance <= range)
@@ -82,14 +84,32 @@ public class Tower : MonoBehaviour
 
     // Manipulation Functions ------------------------------
 
-    public void AddEnemy(GameObject enemy)
+    public void AddEnemyInList(GameObject enemy)
     {
-        enemiesToHit.AddLast(enemy);
+        enemiesToHit.AddFirst(enemy);
     }
 
-    public void RemoveEnemy(GameObject enemy)
+    public void RemoveEnemyInList(GameObject enemy)
     {
-        enemiesToHit.Remove(enemy);
+        LinkedListNode<GameObject> eNode = enemiesToHit.First;
+        for (int i = 0; i < enemiesToHit.Count; i++)
+        {
+            if (eNode.Value == enemy)
+            {
+                enemiesToHit.Remove(eNode);
+                return;
+            }
+
+            eNode = eNode.Next;
+        }
+
+        // If the enemy is not found, then we have an issue
+        Debug.Log("Tower error: enemy not removed...\n\tRow's enemies: " + enemiesToHit.ToString());
+    }
+
+    public bool ContainsEnemyInList(GameObject enemy)
+    {
+        return enemiesToHit.Contains(enemy);
     }
 
     public void Shoot()
