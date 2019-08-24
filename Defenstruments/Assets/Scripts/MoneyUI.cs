@@ -6,8 +6,27 @@ public class MoneyUI : MonoBehaviour
     public Text moneyText;
     public float timeBtwnMoneyUpdates = 0.25f;
 
+    public Text[] buttonTexts;
+
+    Shop shop;
+
     void Start()
     {
+        shop = Shop.instance;
+
+        if(buttonTexts.Length != shop.towerBlueprintGOs.Length)
+        {
+            Debug.LogError("MoneyUI: # of blueprints don't match the # of buttons in bottom panel.");
+        }
+        else
+        {
+            // Set button prices for each tower
+            for (int i = 0; i < shop.towerBlueprintGOs.Length; i++)
+            {
+                buttonTexts[i].text = "$" + shop.GetTowerCost(shop.towerBlueprintGOs[i]);
+            }
+        }
+
         InvokeRepeating("UpdateMoney", 0f, timeBtwnMoneyUpdates);
     }
 

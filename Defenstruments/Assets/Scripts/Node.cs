@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -20,7 +21,11 @@ public class Node : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(tower != null)
+        // If the mouse is over UI element, return
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        if (tower != null)
         {
             Debug.Log("Node: Tower exists here already");
             return;
@@ -34,11 +39,19 @@ public class Node : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        // If the mouse is over UI element, return
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         towerBuilder.LightUpNodes(this);
     }
 
     private void OnMouseExit()
     {
+        // If the mouse is over UI element, return
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         towerBuilder.UnlightUpNodes();
     }
 

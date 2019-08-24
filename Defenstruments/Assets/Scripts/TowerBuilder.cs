@@ -114,7 +114,8 @@ public class TowerBuilder : MonoBehaviour
         t.GetComponent<Tower>().SetRowNum(rowNum);
 
         // Set up targetting
-        towerManager.AddTowerToTowers(t);
+        towerManager.AddTower(t, rowNum);
+
         return t;
     }
 

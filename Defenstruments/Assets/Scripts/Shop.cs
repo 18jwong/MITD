@@ -2,7 +2,19 @@
 
 public class Shop : MonoBehaviour
 {
-    public GameObject[] towerBlueprints;
+    public static Shop instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one Shop in scene!");
+            return;
+        }
+        instance = this;
+    }
+
+    public GameObject[] towerBlueprintGOs;
 
     TowerBuilder towerBuilder;
 
@@ -14,6 +26,12 @@ public class Shop : MonoBehaviour
     // Select towers
     public void SelectTower(int i)
     {
-        towerBuilder.SetTowerToBuild(towerBlueprints[i].GetComponent<TowerBlueprintHolder>().towerBlueprint);
+        towerBuilder.SetTowerToBuild(towerBlueprintGOs[i].GetComponent<TowerBlueprintHolder>().towerBlueprint);
+    }
+
+    // Return the tower cost
+    public int GetTowerCost(GameObject tBGO)
+    {
+        return tBGO.GetComponent<TowerBlueprintHolder>().towerBlueprint.cost;
     }
 }

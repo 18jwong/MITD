@@ -5,15 +5,16 @@ public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
 
+    public float timeBetweenWaves = 5f;
+    public float initialTimeBeforeStart = 2f;
+    private float countdown = 2f;
+
     public TowerManager towerManager;
+    public GameManager gameManager;
 
     public Grid grid;
     private SpawnPointHolder spawnPointHolder;
     private GameObject[] spawnPoints;
-
-    public float timeBetweenWaves = 5f;
-    public float initialTimeBeforeStart = 2f;
-    private float countdown = 2f;
 
     private int waveIndex = 0;
     private int enemiesAlive = 0;
@@ -36,7 +37,8 @@ public class WaveSpawner : MonoBehaviour
         // If the last wave has been reached, end game.
         if (waveIndex >= waves.Length)
         {
-            //gameManager.WinLevel(); // TODO: when all enemies die, end level
+            Debug.Log("WaveSpawner: Level Finished");
+            gameManager.WinLevel();
             this.enabled = false;
             return;
         }
@@ -78,7 +80,7 @@ public class WaveSpawner : MonoBehaviour
         enemy.SetManagerReferences(this);
         enemy.SetRowNum(randomPoint);
 
-        // Add the enemy to list of enemies towers should shoot at
+        // Add the enemy to 'list of enemies' that towers should shoot at
         towerManager.AddEnemy(newEnemyGO, randomPoint);
     }
 
