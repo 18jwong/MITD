@@ -6,7 +6,7 @@ public class MoneyUI : MonoBehaviour
     public Text moneyText;
     public float timeBtwnMoneyUpdates = 0.25f;
 
-    public Text[] buttonTexts;
+    public GameObject bottomPanel;
 
     Shop shop;
 
@@ -14,7 +14,7 @@ public class MoneyUI : MonoBehaviour
     {
         shop = Shop.instance;
 
-        if(buttonTexts.Length != shop.towerBlueprintGOs.Length)
+        if(bottomPanel.transform.childCount != shop.towerBlueprintGOs.Length)
         {
             Debug.LogError("MoneyUI: # of blueprints don't match the # of buttons in bottom panel.");
         }
@@ -23,7 +23,8 @@ public class MoneyUI : MonoBehaviour
             // Set button prices for each tower
             for (int i = 0; i < shop.towerBlueprintGOs.Length; i++)
             {
-                buttonTexts[i].text = "$" + shop.GetTowerCost(shop.towerBlueprintGOs[i]);
+                Text t = bottomPanel.transform.GetChild(i).GetChild(0).GetComponent<Text>();
+                t.text = "$" + shop.GetTowerCost(shop.towerBlueprintGOs[i]);
             }
         }
 

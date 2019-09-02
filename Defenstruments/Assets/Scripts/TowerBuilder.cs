@@ -80,6 +80,12 @@ public class TowerBuilder : MonoBehaviour
     {
         for(int i = 0; i < litNodes.Length; i++)
         {
+            if(litNodes[i] == null)
+            {
+                Debug.LogError("TowerBuilder: node not found");
+                return;
+            }
+
             litNodes[i].UnlightUp();
         }
     }

@@ -96,7 +96,22 @@ public class TowerManager : MonoBehaviour
             {
                 Tower tower = cursor.Value.GetComponent<Tower>();
 
-                if (!tower.singleLaneTargetting || (tower.GetRowNum() == rowNum))
+                // Single Lane Targetting & the enemy is in the right row
+                if (tower.targeting == TargetingMode.singleLane && (tower.GetRowNum() == rowNum))
+                {
+                    tower.AddEnemyInList(e);
+                } // Adjacent Lane Targetting & enemy is in above, same, or below row
+                else if(tower.targeting == TargetingMode.tripleLanes)
+                {
+                    bool above = tower.GetRowNum() + 1 == rowNum;
+                    bool same = tower.GetRowNum() == rowNum;
+                    bool below = tower.GetRowNum() - 1 == rowNum;
+                    if (above || same || below)
+                    {
+                        tower.AddEnemyInList(e);
+                    }
+                } // All Lane Targetting
+                else if (tower.targeting == TargetingMode.allLanes)
                 {
                     tower.AddEnemyInList(e);
                 }
@@ -148,39 +163,47 @@ public class TowerManager : MonoBehaviour
         NavigateToRow(towers, rowNum).AddLast(tGO);
 
         Tower tower = tGO.GetComponent<Tower>();
-        LinkedListNode<LinkedList<GameObject>> cursorOuter = enemiesInRow.First;
 
-        // Add enemies to this tower
-        if (tower.singleLaneTargetting)
+        // Add enemies to this tower for -single lane targeting-
+        if (tower.targeting == TargetingMode.singleLane)
         {
-            // Navigate to correct row
-            for (int i = 0; i < tower.GetRowNum(); i++)
+            AddAllEnemiesInRowToTower(tower, tower.GetRowNum());
+        } // triple lane targeting
+        else if(tower.targeting == TargetingMode.tripleLanes)
+        {
+            // Add the below row if possible
+            if(tower.GetRowNum()-1 >= 0)
             {
-                cursorOuter = cursorOuter.Next;
+                AddAllEnemiesInRowToTower(tower, tower.GetRowNum()-1);
             }
 
-            LinkedListNode<GameObject> cursorInner = cursorOuter.Value.First;
-            // Add every enemy in current cursor's row
-            for (int i = 0; i < cursorOuter.Value.Count; i++)
+            // Add the same row
+            AddAllEnemiesInRowToTower(tower, tower.GetRowNum());
+
+            // Add the above row if possible
+            if(tower.GetRowNum()+1 < enemiesInRow.Count)
             {
-                tower.AddEnemyInList(cursorInner.Value);
-                cursorInner = cursorInner.Next;
+                AddAllEnemiesInRowToTower(tower, tower.GetRowNum() + 1);
             }
-        } else
+        } // all lane targeting
+        else if(tower.targeting == TargetingMode.allLanes)
         {
+            LinkedListNode<LinkedList<GameObject>> rowNode = enemiesInRow.First;
+
             // Add enemies from every row
             for (int i = 0; i < enemiesInRow.Count; i++)
             {
-                LinkedListNode<GameObject> cursorInner = cursorOuter.Value.First;
+                LinkedListNode<GameObject> cursor = rowNode.Value.First;
                 // Add every enemy in current cursorInner's row
-                for (int j = 0; j < cursorOuter.Value.Count; j++)
+                for (int j = 0; j < rowNode.Value.Count; j++)
                 {
-                    tower.AddEnemyInList(cursorInner.Value);
-                    cursorInner = cursorInner.Next;
+                    tower.AddEnemyInList(cursor.Value);
+                    cursor = cursor.Next;
                 }
-                cursorOuter = cursorOuter.Next;
+                rowNode = rowNode.Next;
             }
         }
+
     }
     private void RemoveTowerFromTowers(GameObject tGO)
     {
@@ -189,39 +212,70 @@ public class TowerManager : MonoBehaviour
         // Remove the tower from the towers linked list.
         NavigateToRow(towers, tower.GetRowNum()).Remove(tGO);
 
-        LinkedListNode<LinkedList<GameObject>> cursorOuter = enemiesInRow.First;
-
-        // Remove enemies from this tower
-        if (tower.singleLaneTargetting)
+        // Remove enemies from this tower if -single lane targetting-
+        if (tower.targeting == TargetingMode.singleLane)
         {
-            // Navigate to correct row
-            for (int i = 0; i < tower.GetRowNum(); i++)
+            RemoveAllEnemiesInRowFromTower(tower, tower.GetRowNum());
+        }
+        else if(tower.targeting == TargetingMode.tripleLanes)
+        {
+            // Remove the below row if possible
+            if (tower.GetRowNum() - 1 >= 0)
             {
-                cursorOuter = cursorOuter.Next;
+                RemoveAllEnemiesInRowFromTower(tower, tower.GetRowNum() - 1);
             }
 
-            LinkedListNode<GameObject> cursorInner = cursorOuter.Value.First;
-            // Remove every enemy in current cursor's row
-            for (int i = 0; i < cursorOuter.Value.Count; i++)
+            // Remove the same row
+            RemoveAllEnemiesInRowFromTower(tower, tower.GetRowNum());
+
+            // Remove the above row if possible
+            if (tower.GetRowNum() + 1 < enemiesInRow.Count)
             {
-                tower.RemoveEnemyInList(cursorInner.Value);
-                cursorInner = cursorInner.Next;
+                RemoveAllEnemiesInRowFromTower(tower, tower.GetRowNum() + 1);
             }
         }
-        else
+        else if(tower.targeting == TargetingMode.allLanes)
         {
+            LinkedListNode<LinkedList<GameObject>> rowNode = enemiesInRow.First;
+
             // Remove enemies from every row
             for (int i = 0; i < enemiesInRow.Count; i++)
             {
-                LinkedListNode<GameObject> cursorInner = cursorOuter.Value.First;
+                LinkedListNode<GameObject> cursor = rowNode.Value.First;
                 // Remove every enemy in current cursorInner's row
-                for (int j = 0; j < cursorOuter.Value.Count; j++)
+                for (int j = 0; j < rowNode.Value.Count; j++)
                 {
-                    tower.RemoveEnemyInList(cursorInner.Value);
-                    cursorInner = cursorInner.Next;
+                    tower.RemoveEnemyInList(cursor.Value);
+                    cursor = cursor.Next;
                 }
-                cursorOuter = cursorOuter.Next;
+                rowNode = rowNode.Next;
             }
+        }
+    }
+
+    // Helper function for AddTowerToTowers()
+    private void AddAllEnemiesInRowToTower(Tower tower, int rowNum)
+    {
+        LinkedList<GameObject> row = NavigateToRow(enemiesInRow, rowNum);
+        LinkedListNode<GameObject> cursor = row.First;
+
+        // Add every enemy in current cursor's row
+        for (int i = 0; i < row.Count; i++)
+        {
+            tower.AddEnemyInList(cursor.Value);
+            cursor = cursor.Next;
+        }
+    }
+    private void RemoveAllEnemiesInRowFromTower(Tower tower, int rowNum)
+    {
+        LinkedList<GameObject> row = NavigateToRow(enemiesInRow, rowNum);
+        LinkedListNode<GameObject> cursor = row.First;
+
+        // Remove every enemy in current cursor's row
+        for (int i = 0; i < row.Count; i++)
+        {
+            tower.RemoveEnemyInList(cursor.Value);
+            cursor = cursor.Next;
         }
     }
 

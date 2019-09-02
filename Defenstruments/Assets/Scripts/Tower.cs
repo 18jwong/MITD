@@ -6,8 +6,8 @@ public class Tower : MonoBehaviour
 {
     [Header("Tower Properties")]
     public float range = 99f;
-    public bool singleLaneTargetting = true;
     public float health = 100;
+    public TargetingMode targeting = TargetingMode.singleLane;
 
     // These are passed into the projectile
     [Header("Projectile Properties")]
@@ -21,6 +21,7 @@ public class Tower : MonoBehaviour
 
     [Header("Unity Setup Fields")]
     public Transform firePoint;
+    public Animator animator;
 
     // Private variables
     private Transform target;
@@ -47,13 +48,13 @@ public class Tower : MonoBehaviour
 
         LinkedListNode<GameObject> cursor = enemiesToHit.First;
 
-        for(int i = 0; i < enemiesToHit.Count; i++)
+        for (int i = 0; i < enemiesToHit.Count; i++)
         {
             GameObject e = cursor.Value;
             float distanceToEnemy = Vector2.Distance(transform.position, e.transform.position);
             bool enemyInFrontOfTower = transform.position.x < e.transform.position.x;
 
-            if(distanceToEnemy < shortestDistance && enemyInFrontOfTower)
+            if (distanceToEnemy < shortestDistance && enemyInFrontOfTower)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = e;
@@ -65,10 +66,16 @@ public class Tower : MonoBehaviour
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
+
+            // Set animaton to attack
+            animator.SetBool("Attacking", true);
         }
         else
         {
             target = null;
+
+            // Set animaton to stop attacking
+            animator.SetBool("Attacking", false);
         }
     }
 
@@ -80,13 +87,13 @@ public class Tower : MonoBehaviour
         fireCountdown -= Time.deltaTime;
 
         // If no target, do nothing
-        if(target == null)
+        if (target == null)
         {
             return;
         }
 
         // Shoot() if countdown has been reset
-        if(fireCountdown <= 0f)
+        if (fireCountdown <= 0f)
         {
             Shoot();
             fireCountdown = 1f / shotsPerSecond;
@@ -151,7 +158,7 @@ public class Tower : MonoBehaviour
     public void SubtractHealth(float h)
     {
         health -= h;
-        
+
         // If no health, dies
         if (health <= 0 && !isDead)
         {

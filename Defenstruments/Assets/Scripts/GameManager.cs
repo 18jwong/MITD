@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public Grid grid;
     public float timeBetweenChecks = 0.5f;
+    public int dollarsPerSecond = 5;
 
     [Header("Unity Setup Fields")]
     public GameObject gameOverUI;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
         towerManager = TowerManager.instance;
 
         StartCoroutine(CheckGameOver());
+
+        InvokeRepeating("MoneyAdder", 0f, 1f);
     }
 
     // Cycle through every enemy and check if they passed grid's x-coord.
@@ -78,5 +81,10 @@ public class GameManager : MonoBehaviour
     public bool GameIsOver()
     {
         return gameIsOver;
+    }
+
+    void MoneyAdder()
+    {
+        PlayerStats.AddMoney(dollarsPerSecond);
     }
 }

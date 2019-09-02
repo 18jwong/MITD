@@ -72,8 +72,10 @@
     <Compile Include="Assets\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\SceneFader.cs" />
+    <Compile Include="Assets\Scripts\SettingsController.cs" />
     <Compile Include="Assets\Scripts\Shop.cs" />
     <Compile Include="Assets\Scripts\SpawnPointHolder.cs" />
+    <Compile Include="Assets\Scripts\TargetingMode.cs" />
     <Compile Include="Assets\Scripts\Tower.cs" />
     <Compile Include="Assets\Scripts\TowerBlueprint.cs" />
     <Compile Include="Assets\Scripts\TowerBlueprintHolder.cs" />

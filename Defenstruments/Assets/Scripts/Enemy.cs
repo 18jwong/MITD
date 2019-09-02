@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public float maxSpeedAdjustment = 1f;
     public float startHealth = 100f;
     public float damagePerHit = 10f;
+    public float attacksPerSecond = 1f;
     public float range = 0.2f;
     public int moneyValue = 50;
     public int livesValue = 1;
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
     private float speed;
     private float health;
     private bool attacking = false;
+    private float attackCooldown = 0f;
 
     // Relatively static variables
     private bool isDead = false;
@@ -88,8 +90,17 @@ public class Enemy : MonoBehaviour
             if (target == null)
                 return;
 
+            attackCooldown -= Time.deltaTime;
+
+            // If the cooldown is still active, return.
+            if (attackCooldown > 0f)
+                return;
+
+            // Reset cooldown
+            attackCooldown = 1 / attacksPerSecond;
+
             // Subtracts health and doesn't allow enemy to move.
-            target.GetComponent<Tower>().SubtractHealth(damagePerHit * Time.deltaTime);
+            target.GetComponent<Tower>().SubtractHealth(damagePerHit);
             return;
         }
 

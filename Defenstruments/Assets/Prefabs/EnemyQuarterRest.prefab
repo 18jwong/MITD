@@ -197,8 +197,9 @@ MonoBehaviour:
   maxSpeedAdjustment: 0.25
   startHealth: 50
   damagePerHit: 10
+  attacksPerSecond: 1
   range: 0.7
-  moneyValue: 250
+  moneyValue: 0
   livesValue: 1
   animator: {fileID: -6155410250143566056}
 --- !u!95 &-6155410250143566056

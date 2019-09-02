@@ -4,38 +4,59 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
-    public float disableTime = 5f;
+    public float enableTime = 0.5f;
+    public float disableTime = 2f;
 
     [Header("Unity Setup Fields")]
-    public Animator mainMenuAnimator;
     public GameObject mainMenu;
-    public Animator levelSelectAnimator;
-    public GameObject levelSelect;
+
+    private GameObject currentMenu;
 
     private SceneFader sceneFader;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentMenu = mainMenu;
+
         sceneFader = SceneFader.instance;
     }
 
-    public void ShowLevelSelect()
+    public void ShowMenu(GameObject menu)
     {
-        Debug.Log("MainMenuController: TODO: level select...");
-        mainMenuAnimator.SetTrigger("FadingOut");
-        StartCoroutine(DisableObject(mainMenu));
-    }
+        // Fade out currentMenu
+        TransitionOut();
 
-    public void ShowOptions()
-    {
-        Debug.Log("MainMenuController: TODO: show options...");
+        // Fade in mainMenu
+        StartCoroutine(EnableObject(menu));
+        currentMenu = menu;
     }
 
     public void QuitGame()
     {
         Debug.Log("Exiting...");
         Application.Quit();
+    }
+
+    public void PickLevel(string str)
+    {
+        TransitionOut();
+
+        sceneFader.FadeTo(str);
+    }
+
+    // private helper function for transitioning
+    private void TransitionOut()
+    {
+        currentMenu.GetComponent<Animator>().SetTrigger("FadingOut");
+        StartCoroutine(DisableObject(currentMenu));
+    }
+
+    IEnumerator EnableObject(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(enableTime);
+
+        gameObject.SetActive(true);
     }
 
     IEnumerator DisableObject(GameObject gameObject)
