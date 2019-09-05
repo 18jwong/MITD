@@ -352,6 +352,7 @@ public class TowerManager : MonoBehaviour
         return rowNode.Value;
     }
 
+    // Returns the whole list rows of enemies
     public LinkedList<LinkedList<GameObject>> GetEnemiesList()
     {
         return enemiesInRow;

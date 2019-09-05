@@ -261,6 +261,30 @@ MonoBehaviour:
   targeting: 1
   speed: 10
   damage: 10
+  speedVerticalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   projectilePrefab: {fileID: 5793025471709641560, guid: cc22f950df6d369468694bc3d080a3eb,
     type: 3}
   shotsPerSecond: 1

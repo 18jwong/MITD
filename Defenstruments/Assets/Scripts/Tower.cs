@@ -1,33 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public class Tower : MonoBehaviour
 {
     [Header("Tower Properties")]
-    public float range = 99f;
     public float health = 100;
+    public TowerType towerType = TowerType.attacking;
+
+    // ConditionalField( name of variable, 'not', the values to be true)
+    // Attacking/buffing fields
+    [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
+    public float range = 99f;
+    [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
     public TargetingMode targeting = TargetingMode.singleLane;
+
+    // Money Generating fields
+    [ConditionalField("towerType", false, TowerType.moneyGenerating)]
+    public int dollarsPerSecond = 5;
 
     // These are passed into the projectile
     [Header("Projectile Properties")]
+    [ConditionalField("towerType", false, TowerType.attacking)]
     public float speed = 30f;
+    [ConditionalField("towerType", false, TowerType.attacking)]
     public float damage = 10f;
-
-    public GameObject projectilePrefab;
+    [ConditionalField("towerType", false, TowerType.attacking)]
     public float shotsPerSecond = 1f;
+    [ConditionalField("towerType", false, TowerType.attacking)]
     public float initialTimeUntilFire = 1f;
     private float fireCountdown;
 
+    [ConditionalField("towerType", false, TowerType.attacking)]
+    public GameObject projectilePrefab;
+    [ConditionalField("towerType", false, TowerType.attacking)]
+    public AnimationCurve speedVerticalCurve;
+
+    // These are required for Unity to run
     [Header("Unity Setup Fields")]
+    [ConditionalField("towerType", false, TowerType.attacking)]
     public Transform firePoint;
     public Animator animator;
 
     // Private variables
-    private Transform target;
     private LinkedList<GameObject> enemiesToHit = new LinkedList<GameObject>();
     private int rowNum;
     private bool isDead = false;
+    private bool isAttacking = false;
 
     private TowerManager towerManager;
 
@@ -35,13 +55,22 @@ public class Tower : MonoBehaviour
     {
         towerManager = TowerManager.instance;
 
-        // Projectile Setup
-        fireCountdown = initialTimeUntilFire;
+        // If tower is of type attacking, start checking attack animation
+        if(towerType == TowerType.attacking)
+        {
+            // Projectile Setup
+            fireCountdown = initialTimeUntilFire;
 
-        InvokeRepeating("UpdateTarget", 0f, 0.25f);
+            InvokeRepeating("UpdateAnimation", 0f, 0.125f);
+
+        } // If the tower is of type moneyGenerating, then don't start targetting
+        else if (towerType == TowerType.moneyGenerating)
+        {
+            InvokeRepeating("GenerateMoney", 0f, 1f);
+        }
     }
 
-    void UpdateTarget()
+    void UpdateAnimation()
     {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -65,18 +94,22 @@ public class Tower : MonoBehaviour
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
-            target = nearestEnemy.transform;
+            isAttacking = true;
 
             // Set animaton to attack
             animator.SetBool("Attacking", true);
         }
         else
         {
-            target = null;
-
+            isAttacking = false;
             // Set animaton to stop attacking
             animator.SetBool("Attacking", false);
         }
+    }
+
+    void GenerateMoney()
+    {
+        PlayerStats.AddMoney(dollarsPerSecond);
     }
 
     private void Update()
@@ -84,10 +117,14 @@ public class Tower : MonoBehaviour
         if (isDead)
             return;
 
+        // If the tower is of type moneyGenerating, then don't update anything
+        if (towerType == TowerType.moneyGenerating)
+            return;
+
         fireCountdown -= Time.deltaTime;
 
-        // If no target, do nothing
-        if (target == null)
+        // If not attacking, do nothing
+        if (!isAttacking)
         {
             return;
         }
@@ -100,7 +137,7 @@ public class Tower : MonoBehaviour
         }
     }
 
-    // Private helper functions
+    // Private helper functions ------------------------------
 
     private void Shoot()
     {
@@ -109,9 +146,30 @@ public class Tower : MonoBehaviour
         Projectile projectile = projectileGO.GetComponent<Projectile>();
 
         // Calls Seek() in Bullet script
-        if (projectile != null)
+        if (targeting == TargetingMode.singleLane)
         {
-            projectile.Seek(target, speed, damage);
+            projectile.Seek(rowNum, speed, damage, speedVerticalCurve);
+        }
+        else if(targeting == TargetingMode.tripleLanes)
+        {
+            // Middle projectile
+            projectile.Seek(rowNum, speed, damage, speedVerticalCurve);
+
+            // Below projectile
+            if(rowNum-1 >= 0)
+            {
+                projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+                projectile = projectileGO.GetComponent<Projectile>();
+                projectile.Seek(rowNum - 1, speed, damage, speedVerticalCurve);
+            }
+
+            // Above projectile
+            if(rowNum+1 < towerManager.GetEnemiesList().Count)
+            {
+                projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+                projectile = projectileGO.GetComponent<Projectile>();
+                projectile.Seek(rowNum+1, speed, damage, speedVerticalCurve);
+            }
         }
     }
 
@@ -143,6 +201,11 @@ public class Tower : MonoBehaviour
     public bool ContainsEnemyInList(GameObject enemy)
     {
         return enemiesToHit.Contains(enemy);
+    }
+    
+    public LinkedList<GameObject> GetEnemiesList()
+    {
+        return enemiesToHit;
     }
 
     public void SetRowNum(int rN)
