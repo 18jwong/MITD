@@ -113,9 +113,9 @@ MonoBehaviour:
     width: 1600
     height: 767
   m_MinSize: {x: 711, y: 472}
-  m_MaxSize: {x: 18008, y: 14022}
+  m_MaxSize: {x: 18006, y: 14022}
   vertical: 0
-  controlID: 17159
+  controlID: 156
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 472}
   m_MaxSize: {x: 10002, y: 14022}
   vertical: 1
-  controlID: 17128
+  controlID: 42
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,8 +160,8 @@ MonoBehaviour:
     y: 0
     width: 318
     height: 364
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -214,10 +214,10 @@ MonoBehaviour:
     y: 0
     width: 800
     height: 767
-  m_MinSize: {x: 202, y: 344}
-  m_MaxSize: {x: 4004, y: 8044}
+  m_MinSize: {x: 204, y: 322}
+  m_MaxSize: {x: 4004, y: 8022}
   vertical: 1
-  controlID: 17160
+  controlID: 99
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -237,17 +237,17 @@ MonoBehaviour:
     y: 0
     width: 800
     height: 365
-  m_MinSize: {x: 104, y: 122}
-  m_MaxSize: {x: 4004, y: 4022}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 20}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 4
+  m_LastSelected: 1
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -413,7 +413,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e0e0feffa022ffff04fbffff22fbffff38fbffff6cfbffffce940000
+      m_ExpandedIDs: aaf0ffff48f4ffff6afbffff4e4800007a480000d648000022490000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -476,7 +476,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders:
@@ -489,7 +489,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: f0280000
     m_LastClickedID: 10480
-    m_ExpandedIDs: ffffffff0000000012320000243400003c34000082340000f6360000da37000084380000ec3a0000e83b0000123d0000ae440000ffffff7f
+    m_ExpandedIDs: 00000000f4320000163500002e35000076350000fe370000e43800008e390000003c0000003d00002e3e00003c460000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -514,10 +514,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 60}
+    scrollPos: {x: 0, y: 261}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000012320000243400003c34000082340000f6360000da37000084380000ec3a0000e83b0000123d0000ae440000ffffff7f
+    m_ExpandedIDs: ffffffff00000000f4320000163500002e35000076350000fe37000012380000e4380000ea3800008e390000e43b0000003d00002e3e00003c46000086460000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_ResetOnNextRepaint: 0
   m_SelectedAssetPath: Assets/Images/AltoSax.png
-  m_SelectedSpriteRectGUID: 56e566e46f226a549bb947231593fc2b
+  m_SelectedSpriteRectGUID: 0554ee6ff330266489d1cbda1be7c2e3
   m_LastUsedModuleTypeName: UnityEditor.Experimental.U2D.Animation.SkinningModule
 --- !u!114 &19
 MonoBehaviour:
@@ -968,12 +968,12 @@ MonoBehaviour:
     x: 318
     y: 73
     width: 798
-    height: 372
+    height: 346
   m_ViewDataDictionary: {fileID: 0}
   m_MixersTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: -46934
+    m_SelectedIDs: 12380000
+    m_LastClickedID: 14354
     m_ExpandedIDs: 12eb343c
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1044,7 +1044,7 @@ MonoBehaviour:
       splitSize: 6
       xOffset: 0
     m_HorizontalSplitter:
-      ID: 4528
+      ID: 115
       splitterInitialOffset: 0
       currentActiveSplitter: -1
       realSizes: f00000002f020000
@@ -1090,7 +1090,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -66284
+  m_LastSelectedObjectID: 13718
 --- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52

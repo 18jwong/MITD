@@ -9,7 +9,7 @@ public class SettingsController : MonoBehaviour
     public AudioMixer audioMixer;
     public Slider volSlider;
 
-    private void Awake()
+    private void Start()
     {
         float lastSetVolume = PlayerPrefs.GetFloat("volume");
         volSlider.value = lastSetVolume;

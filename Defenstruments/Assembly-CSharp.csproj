@@ -177,11 +177,11 @@
     <Reference Include="Unity.InternalAPIEditorBridge.001">
       <HintPath>C:/Unity Projects/MITD/Defenstruments/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Unity Projects/MITD/Defenstruments/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="MyBox">
       <HintPath>C:/Unity Projects/MITD/Defenstruments/Library/ScriptAssemblies/MyBox.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>C:/Unity Projects/MITD/Defenstruments/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.1f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
