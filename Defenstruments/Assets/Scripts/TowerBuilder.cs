@@ -122,6 +122,9 @@ public class TowerBuilder : MonoBehaviour
         // Set up targetting
         towerManager.AddTower(t, rowNum);
 
+        // Reset towerToBuild
+        towerToBuild = null;
+
         return t;
     }
 

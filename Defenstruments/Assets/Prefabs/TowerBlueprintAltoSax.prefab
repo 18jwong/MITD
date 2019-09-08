@@ -47,3 +47,4 @@ MonoBehaviour:
     prefab: {fileID: 3032664706651625655, guid: e7341c3834e8fcd42b240a75425b9797,
       type: 3}
     cost: 500
+    rentCost: 125

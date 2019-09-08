@@ -1,4 +1,5 @@
-using Plugins.MyBox.Tools;
+//using Plugins.MyBox.Tools;
+using System;
 
 #if UNITY_EDITOR
 namespace MyBox.Internal

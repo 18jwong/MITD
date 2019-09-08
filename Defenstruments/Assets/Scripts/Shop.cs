@@ -30,8 +30,14 @@ public class Shop : MonoBehaviour
     }
 
     // Return the tower cost
-    public int GetTowerCost(GameObject tBGO)
+    public int GetTowerCost(int index)
     {
-        return tBGO.GetComponent<TowerBlueprintHolder>().towerBlueprint.cost;
+        return towerBlueprintGOs[index].GetComponent<TowerBlueprintHolder>().towerBlueprint.cost;
+    }
+
+    // Return the tower rent cost
+    public int GetTowerRentCost(int index)
+    {
+        return towerBlueprintGOs[index].GetComponent<TowerBlueprintHolder>().towerBlueprint.rentCost;
     }
 }

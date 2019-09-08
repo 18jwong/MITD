@@ -7,4 +7,5 @@ public class TowerBlueprint
 {
     public GameObject prefab;
     public int cost;
+    public int rentCost;
 }

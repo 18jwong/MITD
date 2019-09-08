@@ -24,7 +24,7 @@ public class MoneyUI : MonoBehaviour
             for (int i = 0; i < shop.towerBlueprintGOs.Length; i++)
             {
                 Text t = bottomPanel.transform.GetChild(i).GetChild(0).GetComponent<Text>();
-                t.text = "$" + shop.GetTowerCost(shop.towerBlueprintGOs[i]);
+                t.text = "$" + shop.GetTowerCost(i);
             }
         }
 
