@@ -58,6 +58,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -121,4 +122,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 5372545440763102536}
   secondColor: {r: 1, g: 1, b: 1, a: 0.49019608}
-  grid: {fileID: 4403130343471280099, guid: 8edf1e2378685e444be65bb50b984d07, type: 3}
+  cannotBuildColor: {r: 1, g: 0.41037738, b: 0.41037738, a: 0.49019608}

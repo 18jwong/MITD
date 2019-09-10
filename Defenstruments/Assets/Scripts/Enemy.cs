@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public float range = 0.2f;
     public int moneyValue = 50;
     public int livesValue = 1;
+    public float deathLength = 1f;
 
     [Header("Unity Setup")]
     public Animator animator;
@@ -125,6 +126,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         isDead = true;
+        animator.SetTrigger("IsDead");
 
         // Remove the enemy from targetting and wave spawner
         towerManager.RemoveEnemy(gameObject);
@@ -133,7 +135,7 @@ public class Enemy : MonoBehaviour
         // Add money
         PlayerStats.AddMoney(moneyValue);
 
-        Destroy(gameObject);
+        Destroy(gameObject, deathLength);
     }
 
     public void SetManagerReferences(WaveSpawner ws)

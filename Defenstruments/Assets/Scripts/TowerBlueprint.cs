@@ -6,6 +6,7 @@ using UnityEngine;
 public class TowerBlueprint
 {
     public GameObject prefab;
+    public GameObject prefabGhost;
     public int cost;
     public int rentCost;
 }

@@ -575,6 +575,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5941238197884346081, guid: fd16b00cc04a1a044a99d42f5ae39c29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3109236728054195338, guid: fd16b00cc04a1a044a99d42f5ae39c29,
+        type: 3}
+      propertyPath: uiHeight
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd16b00cc04a1a044a99d42f5ae39c29, type: 3}
 --- !u!1001 &4403130341748476905

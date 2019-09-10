@@ -46,5 +46,7 @@ MonoBehaviour:
   towerBlueprint:
     prefab: {fileID: 3032664706651625655, guid: e7341c3834e8fcd42b240a75425b9797,
       type: 3}
+    prefabGhost: {fileID: 3032664706651625655, guid: 3d25b49bf51ac374d8efb6ee49856d4f,
+      type: 3}
     cost: 500
     rentCost: 125

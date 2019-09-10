@@ -23,7 +23,7 @@ public class TowerBuilder : MonoBehaviour
     public Grid grid;
     public GameObject[] cols;
 
-    private Node[] litNodes;
+    private Node[] litNodes = new Node[0];
     private int nodeCount;
 
     private TowerBlueprint towerToBuild;
@@ -38,6 +38,10 @@ public class TowerBuilder : MonoBehaviour
     // Lights up nodes vertically and horizontally from the node hovered over
     public void LightUpNodes(Node node)
     {
+        // If a tower hasn't been selected to build, don't light up grid.
+        if (towerToBuild == null)
+            return;
+
         // Determine cell location on grid
         Vector3 targetCell = grid.WorldToCell(node.transform.position);
         int cellX = (int)targetCell.x;
@@ -52,7 +56,14 @@ public class TowerBuilder : MonoBehaviour
         for (int i = 0; i < cols[0].transform.childCount; i++)
         {
             Transform t = column.GetChild(i);
-            StoreNode(t);
+
+            if (i == cellY)
+            {
+                StoreCursorNode(t);
+            } else
+            {
+                StoreNode(t);
+            }
         }
 
         // Light up nodes horizontally
@@ -75,14 +86,24 @@ public class TowerBuilder : MonoBehaviour
         nodeCount++;
     }
 
+    private void StoreCursorNode(Transform t)
+    {
+        litNodes[nodeCount] = t.GetComponent<Node>();
+        litNodes[nodeCount].LightUpCursorNode(towerToBuild);
+        nodeCount++;
+    }
+
     // Unlights the stored nodes
     public void UnlightUpNodes()
     {
-        for(int i = 0; i < litNodes.Length; i++)
+        // If a tower hasn't been selected to build, don't unlight up grid
+        // since it wasn't lit to begin with
+
+        for (int i = 0; i < litNodes.Length; i++)
         {
             if(litNodes[i] == null)
             {
-                Debug.LogError("TowerBuilder: node not found");
+                Debug.Log("TowerBuilder: node not found");
                 return;
             }
 
