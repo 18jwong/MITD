@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.mybox": {
-      "version": "https://github.com/Deadcows/MyBox.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "73375eb768ed43b2b5fcd638316eb8b303e4f1ee"
-    },
     "com.unity.2d.animation": {
       "version": "3.2.6",
       "depth": 0,

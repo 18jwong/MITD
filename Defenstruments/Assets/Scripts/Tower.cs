@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MyBox;
+// using MyBox;
 
 public class Tower : MonoBehaviour
 {
@@ -11,35 +11,35 @@ public class Tower : MonoBehaviour
 
     // ConditionalField( name of variable, 'not', the values to be true)
     // Attacking/buffing fields
-    [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
+    // [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
     public float range = 99f;
-    [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
+    // [ConditionalField("towerType", false, TowerType.attacking, TowerType.buffing)]
     public TargetingMode targeting = TargetingMode.singleLane;
 
     // Money Generating fields
-    [ConditionalField("towerType", false, TowerType.moneyGenerating)]
+    // [ConditionalField("towerType", false, TowerType.moneyGenerating)]
     public int dollarsPerSecond = 5;
 
     // These are passed into the projectile
     [Header("Projectile Properties")]
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public float speed = 30f;
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public float damage = 10f;
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public float shotsPerSecond = 1f;
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public float initialTimeUntilFire = 1f;
     private float fireCountdown;
 
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public GameObject projectilePrefab;
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public AnimationCurve speedVerticalCurve;
 
     // These are required for Unity to run
     [Header("Unity Setup Fields")]
-    [ConditionalField("towerType", false, TowerType.attacking)]
+    // [ConditionalField("towerType", false, TowerType.attacking)]
     public Transform firePoint;
     public Animator animator;
 
